@@ -17,14 +17,14 @@ self.addEventListener('install', function(event) {
     caches
       .open(CACHE_NAME)
       .then(function(cache) {
-        console.log('Opened cache');
+        console.log('opened cache');
         return cache.addAll(urlsToCache);
       })
-      .then(function(obj) {
-        console.log('obj :', obj);
+      .then(function() {
+        console.log('success cache.addAll');
       })
       .catch(function(error) {
-        console.log('error :', error);
+        console.log('cache error :', error);
       })
   );
 });
@@ -34,10 +34,11 @@ self.addEventListener('fetch', function(event) {
 
   event.respondWith(
     caches.match(event.request).then(function(response) {
-      console.log('match response :', response);
+      console.log('caches.match response :', response);
 
       // Cache hit - return response
       if (response) {
+        console.log('cache hit :', response);
         return response;
       }
 
