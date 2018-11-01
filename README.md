@@ -2,7 +2,7 @@
 
 
 ## About
-* Study Service worker
+* Arrange Service worker
 
 
 ## Contact

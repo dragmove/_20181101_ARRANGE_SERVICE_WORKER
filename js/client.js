@@ -1,13 +1,15 @@
-(() => {
+(function() {
   'use strict';
 
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      console.log('has serviceWorker');
-      /*
+    window.addEventListener('load', () => {
+      console.log('load complete');
+
       navigator.serviceWorker
         .register('/sw.js')
         .then(function(registration) {
+          console.log('registration :', registration);
+
           // Registration was successful
           console.log(
             'ServiceWorker registration successful with scope: ',
@@ -18,7 +20,6 @@
           // registration failed :(
           console.log('ServiceWorker registration failed: ', err);
         });
-        */
     });
   }
 })();
