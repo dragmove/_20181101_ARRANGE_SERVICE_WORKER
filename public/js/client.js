@@ -6,7 +6,7 @@
       console.log('load complete');
 
       navigator.serviceWorker
-        .register('/public/sw.js')
+        .register('/_20181101_ARRANGE_SERVICE_WORKER/public/sw.js')
         .then(function(registration) {
           console.log('registration :', registration);
 
