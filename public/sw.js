@@ -1,7 +1,6 @@
 var CACHE_NAME = 'cache-v1';
 
 var urlsToCache = [
-  '/_20181101_ARRANGE_SERVICE_WORKER/public/',
   '/_20181101_ARRANGE_SERVICE_WORKER/public/css/index.css',
   '/_20181101_ARRANGE_SERVICE_WORKER/public/img/favicon.ico',
   '/_20181101_ARRANGE_SERVICE_WORKER/public/img/award_bg.jpg',
