@@ -1,9 +1,9 @@
 var CACHE_NAME = 'cache-v1';
 
 var urlsToCache = [
-  '/_20181101_ARRANGE_SERVICE_WORKER/',
+  // '/_20181101_ARRANGE_SERVICE_WORKER/',
   '/_20181101_ARRANGE_SERVICE_WORKER/public/css/index.css',
-  '/_20181101_ARRANGE_SERVICE_WORKER/public/img/favicon.ico',
+  // '/_20181101_ARRANGE_SERVICE_WORKER/public/img/favicon.ico',
   '/_20181101_ARRANGE_SERVICE_WORKER/public/img/award_bg.jpg',
   '/_20181101_ARRANGE_SERVICE_WORKER/public/img/namecard_bg.jpg',
   '/_20181101_ARRANGE_SERVICE_WORKER/public/img/winter.png'
@@ -29,6 +29,7 @@ self.addEventListener('install', function(event) {
   );
 });
 
+// after install
 self.addEventListener('fetch', function(event) {
   console.log('fetch');
 
