@@ -4,7 +4,9 @@
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register('/_20181101_ARRANGE_SERVICE_WORKER/sw.js')
+        .register('/_20181101_ARRANGE_SERVICE_WORKER/sw.js', {
+          scope: '/_20181101_ARRANGE_SERVICE_WORKER/'
+        })
         .then(function(registration) {
           console.log('registration :', registration);
 
