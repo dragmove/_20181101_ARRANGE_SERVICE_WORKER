@@ -3,8 +3,6 @@
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      console.log('load complete');
-
       navigator.serviceWorker
         .register('/_20181101_ARRANGE_SERVICE_WORKER/public/sw.js')
         .then(function(registration) {
