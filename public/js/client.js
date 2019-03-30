@@ -19,6 +19,10 @@
           // Registration failed :(
           console.log("ServiceWorker registration failed: ", err);
         });
+
+      navigator.serviceWorker.ready.then(function(registration) {
+        console.log("ServiceWorker Ready");
+      });
     });
   }
 })();
