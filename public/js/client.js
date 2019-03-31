@@ -23,6 +23,22 @@
       navigator.serviceWorker.ready.then(function(registration) {
         console.log("ServiceWorker Ready");
       });
+
+      // We can save something to cache by user interaction from client pages.
+      // https://jakearchibald.com/2014/offline-cookbook/
+      /*
+      document
+        .querySelector(".cache-article")
+        .addEventListener("click", async event => {
+          event.preventDefault();
+
+          const id = this.dataset.articleId;
+          const cache = await caches.open("mysite-article-" + id);
+          const response = await fetch("/get-article-urls?id=" + id);
+          const urls = await response.json();
+          await cache.addAll(urls);
+        });
+      */
     });
   }
 })();

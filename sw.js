@@ -13,6 +13,7 @@ self.addEventListener("install", function(event) {
   console.log("install");
 
   // Perform install steps
+  /*
   event.waitUntil(
     caches
       .open(CACHE_NAME)
@@ -27,6 +28,19 @@ self.addEventListener("install", function(event) {
         console.log("cache error :", error);
       })
   );
+  */
+
+  // Apply async, await
+  // https://jakearchibald.com/2014/offline-cookbook/
+  event.waitUntil(async function() {
+    const cache = await caches.open(CACHE_NAME);
+
+    // core asset 이 아닌 생략 가능한 파일들은, 설치가 완료되기를 기다리지 않아도 된다.
+    // cache.addAll( not important asset urls )
+
+    // offline 사용을 위한 필수적인 core asset 의 설치가 완료되기를 기다린다.
+    await cache.addAll(urlsToCache);
+  });
 });
 
 // after install
@@ -91,6 +105,34 @@ self.addEventListener("fetch", function(event) {
         });
       })
   );
+
+  // Cache strategy
+  // https://jakearchibald.com/2014/offline-cookbook/
+
+  // 1. On network response
+  // user 의 받은 편지함, 또는 article 컨텐츠와 같은 빈번하게 업데이트되는 리소스를 캐시하는데 적합한 전략이다.
+  // user avartar 와 같은 필수적이지 않은 컨텐츠에도 유용하지만, 주의가 필요하다.
+  // TODO: 잘 이해가 안 간다. 빈번하게 업데이트되는 리소스가 한번이라도 캐시되면, 이후부터는 계속해서 캐시된 값만 보여주게 되니 이후에 업데이트된 리소스를 보여줄 수 없는 것이 아닌가? 'ㅅ')
+  /*
+  self.addEventListener("fetch", event => {
+    event.respondWith(
+      (async function() {
+        // 캐시된 값이 있다면, 캐시된 값을 반환.
+        const cache = await caches.open("mysite-dynamic");
+        const cachedResponse = await cache.match(event.request);
+        if (cachedResponse) return cachedResponse;
+
+        // 캐시된 값이 없다면, network 요청하여 전달 받은 값을 반환.
+        // If a request doesn't match anything in the cache, get it from the network, send it to the page & add it to the cache at the same time.
+        const networkResponse = await fetch(event.request);
+        event.waitUntil(cache.put(event.request, networkResponse.clone()));
+        return networkResponse;
+      })()
+    );
+  });
+  */
+
+  // 2.
 });
 
 self.addEventListener("activate", function(event) {
@@ -118,6 +160,24 @@ self.addEventListener("activate", function(event) {
 
   // activate 완료시, 이 메소드를 호출하여 브라우저에 대한 제어권을 가져와야 한다.
   return self.clients.claim();
+  */
+  // Apply async, await
+  // https://jakearchibald.com/2014/offline-cookbook/
+  /*
+  event.waitUntil(
+    (async function() {
+      const cacheNames = await caches.keys();
+      await Promise.all(
+        cacheNames
+          .filter(cacheName => {
+            // Return true if you want to remove this cache,
+            // but remember that caches are shared across
+            // the whole origin
+          })
+          .map(cacheName => caches.delete(cacheName))
+      );
+    })()
+  );
   */
 });
 
