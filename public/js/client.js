@@ -25,19 +25,22 @@
       });
 
       // We can save something to cache by user interaction from client pages.
-      // https://jakearchibald.com/2014/offline-cookbook/
+      // https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/?hl=ko#on-user-interaction
       /*
-      document
-        .querySelector(".cache-article")
-        .addEventListener("click", async event => {
-          event.preventDefault();
+      document.querySelector('.cache-article').addEventListener('click', function(event) {
+        event.preventDefault();
 
-          const id = this.dataset.articleId;
-          const cache = await caches.open("mysite-article-" + id);
-          const response = await fetch("/get-article-urls?id=" + id);
-          const urls = await response.json();
-          await cache.addAll(urls);
+        var id = this.dataset.articleId;
+        caches.open('mysite-article-' + id).then(function(cache) {
+          fetch('/get-article-urls?id=' + id).then(function(response) {
+            // /get-article-urls returns a JSON-encoded array of
+            // resource URLs that a given article depends on
+            return response.json();
+          }).then(function(urls) {
+            cache.addAll(urls);
+          });
         });
+      });
       */
     });
   }
