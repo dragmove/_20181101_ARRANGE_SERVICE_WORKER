@@ -52,6 +52,25 @@ self.addEventListener("install", function(event) {
   */
 });
 
+/*
+# 제안 제공 - 요청에 응답.
+https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/?hl=ko#serving-suggestions
+
++ 요청 처리를 위한 패턴
+- 1. 캐시 전용
+사이트의 해당 '버전'에 정적인 것으로 간주되는 모든 것에 적절하다.
+설치 이벤트에서 이를 캐시했으므로, 이 캐시된 값에 의존할 수 있다.
+
+self.addEventListener("fetch", function(event) {
+  // If a match isn't found in the cache, the response
+  // will look like a connection error
+  event.respondWith(caches.match(event.request));
+});
+
+- 2. 네트워크 전용
+TODO: write
+*/
+
 // after install
 self.addEventListener("fetch", function(event) {
   // 자원에 대한 request 가 발생하면,
@@ -158,6 +177,12 @@ self.addEventListener("fetch", function(event) {
   */
 
   // 3. On Background-sync
+  // https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/?hl=ko#on-background-sync
+  // 긴급하지 않은 업데이트, 특히 소셜 일정이나 뉴스 기사와 같이 업데이트별 푸시 메세지가 매우 자주 주기적으롭 발생하는 업데이트에 적합한 전략이다.
+  // 이 기능을 사용하여 일회용으로 또는 (매우 경험적인) 간격으로 백그라운드 데이터 동기화를 요청할 수 있습니다.
+  // 이는 사용자가 사이트에 대해 탭을 열지 않은 경우에도 발생하는데, Service Worker 만 활성화됩니다.
+  // TODO: 어떻게 발생시킬 수 있는가 'ㅅ')?
+  /*
   self.addEventListener("sync", function(event) {
     if (event.id == "update-leaderboard") {
       event.waitUntil(
@@ -167,6 +192,7 @@ self.addEventListener("fetch", function(event) {
       );
     }
   });
+  */
 });
 
 self.addEventListener("activate", function(event) {
